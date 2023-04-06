@@ -59,7 +59,7 @@ class WarpingTrainer:
         fig.set_size_inches(12, self.model_length * len(layers) * 6)
         fig.suptitle("Activation regions")
         
-        index = 0;
+        index = 0
         for i in range(self.model_length):
             for j in range(len(layers)):
                 visualizer = gradcam.GradCam(self.model[i], target_layer=layers[j])
@@ -94,13 +94,13 @@ class WarpingTrainer:
         
         self.batch_loss = 0.0
         for i in range(self.model_length):
-            self.model[i].train();
+            self.model[i].train()
             pred = self.model[i](warp_gpu)
             self.optimizers[i].zero_grad()
             loss = self.singular_loss(pred, t[i], w[i])
             self.batch_loss = self.batch_loss + loss.cpu().data
             loss.backward()
-            self.optimizers[i].step();       
+            self.optimizers[i].step()
         
         if(self.visualized == False):
             self.visualized = True

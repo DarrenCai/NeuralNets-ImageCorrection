@@ -11,9 +11,7 @@ import numpy as np
 import cv2
 import global_vars as gv
 from matplotlib import pyplot as plt
-from skimage.measure import compare_ssim
-from skimage.measure import compare_mse
-from skimage.measure import compare_nrmse
+from skimage import measure
 
 class Counters:
     def __init__(self):
@@ -275,17 +273,17 @@ def measure_ssim(warp_img, rgb_img, matrix_mean, matrix_H, matrix_own, count, sh
        
         SSIM = [0.0, 0.0, 0.0]; MSE = [0.0, 0.0, 0.0]; RMSE = [0.0, 0.0, 0.0]
         
-        SSIM[0] = np.round(compare_ssim(mean_img, rgb_img, multichannel = True),4)
-        SSIM[1] = np.round(compare_ssim(h_img, rgb_img, multichannel = True),4)
-        SSIM[2] = np.round(compare_ssim(own_img, rgb_img, multichannel = True),4)
+        SSIM[0] = np.round(measure.compare_ssim(mean_img, rgb_img, multichannel = True),4)
+        SSIM[1] = np.round(measure.compare_ssim(h_img, rgb_img, multichannel = True),4)
+        SSIM[2] = np.round(measure.compare_ssim(own_img, rgb_img, multichannel = True),4)
         
-        MSE[0] = np.round(compare_mse(mean_img, rgb_img),4)
-        MSE[1] = np.round(compare_mse(h_img, rgb_img),4)
-        MSE[2] = np.round(compare_mse(own_img, rgb_img),4)
+        MSE[0] = np.round(measure.compare_mse(mean_img, rgb_img),4)
+        MSE[1] = np.round(measure.compare_mse(h_img, rgb_img),4)
+        MSE[2] = np.round(measure.compare_mse(own_img, rgb_img),4)
         
-        RMSE[0] = np.round(compare_nrmse(rgb_img, mean_img),4)
-        RMSE[1] = np.round(compare_nrmse(rgb_img, h_img),4)
-        RMSE[2] = np.round(compare_nrmse(rgb_img, own_img),4)
+        RMSE[0] = np.round(measure.compare_nrmse(rgb_img, mean_img),4)
+        RMSE[1] = np.round(measure.compare_nrmse(rgb_img, h_img),4)
+        RMSE[2] = np.round(measure.compare_nrmse(rgb_img, own_img),4)
         
         if(should_visualize):
             f, (ax1, ax2, ax3, ax4, ax5) = plt.subplots(5, 1, sharex=True)
@@ -337,23 +335,23 @@ def measure_with_rrl(warp_img_name, warp_img, rrl_img_1, rrl_img_2, rgb_img, mat
        
         SSIM = [0.0, 0.0, 0.0, 0.0, 0.0]; MSE = [0.0, 0.0, 0.0, 0.0, 0.0]; RMSE = [0.0, 0.0, 0.0, 0.0, 0.0]
         
-        SSIM[0] = np.round(compare_ssim(mean_img, rgb_img, multichannel = True),4)
-        SSIM[1] = np.round(compare_ssim(h_img, rgb_img, multichannel = True),4)
-        SSIM[2] = np.round(compare_ssim(rrl_img_1, rgb_img, multichannel = True),4)
-        SSIM[3] = np.round(compare_ssim(rrl_img_2, rgb_img, multichannel = True),4)
-        SSIM[4] = np.round(compare_ssim(own_img, rgb_img, multichannel = True),4)
+        SSIM[0] = np.round(measure.compare_ssim(mean_img, rgb_img, multichannel = True),4)
+        SSIM[1] = np.round(measure.compare_ssim(h_img, rgb_img, multichannel = True),4)
+        SSIM[2] = np.round(measure.compare_ssim(rrl_img_1, rgb_img, multichannel = True),4)
+        SSIM[3] = np.round(measure.compare_ssim(rrl_img_2, rgb_img, multichannel = True),4)
+        SSIM[4] = np.round(measure.compare_ssim(own_img, rgb_img, multichannel = True),4)
         
-        MSE[0] = np.round(compare_mse(mean_img, rgb_img),4)
-        MSE[1] = np.round(compare_mse(h_img, rgb_img),4)
-        MSE[2] = np.round(compare_mse(rrl_img_1, rgb_img),4)
-        MSE[3] = np.round(compare_mse(rrl_img_2, rgb_img),4)
-        MSE[4] = np.round(compare_mse(own_img, rgb_img),4)
+        MSE[0] = np.round(measure.compare_mse(mean_img, rgb_img),4)
+        MSE[1] = np.round(measure.compare_mse(h_img, rgb_img),4)
+        MSE[2] = np.round(measure.compare_mse(rrl_img_1, rgb_img),4)
+        MSE[3] = np.round(measure.compare_mse(rrl_img_2, rgb_img),4)
+        MSE[4] = np.round(measure.compare_mse(own_img, rgb_img),4)
         
-        RMSE[0] = np.round(compare_nrmse(rgb_img, mean_img),4)
-        RMSE[1] = np.round(compare_nrmse(rgb_img, h_img),4)
-        RMSE[2] = np.round(compare_nrmse(rrl_img_1, rgb_img),4)
-        RMSE[3] = np.round(compare_nrmse(rrl_img_2, rgb_img),4)
-        RMSE[4] = np.round(compare_nrmse(rgb_img, own_img),4)
+        RMSE[0] = np.round(measure.compare_nrmse(rgb_img, mean_img),4)
+        RMSE[1] = np.round(measure.compare_nrmse(rgb_img, h_img),4)
+        RMSE[2] = np.round(measure.compare_nrmse(rrl_img_1, rgb_img),4)
+        RMSE[3] = np.round(measure.compare_nrmse(rrl_img_2, rgb_img),4)
+        RMSE[4] = np.round(measure.compare_nrmse(rgb_img, own_img),4)
         
         if(should_visualize):
             f, (ax1, ax2, ax3, ax4, ax5, ax6, ax7) = plt.subplots(7, 1, sharex=True)
@@ -399,9 +397,9 @@ def show_auto_encoder_img(warp_img, pred_img, ground_truth_img, test_title):
     ground_truth_resize = cv2.resize(ground_truth_img, (gv.WARP_W, gv.WARP_H))
     print("Input: ",np.shape(pred_img), "Pred: ", np.shape(pred_img)," Ground truth: ",np.shape(ground_truth_img))
     
-    #SSIM[0] = np.round(compare_ssim(pred_img, ground_truth_img, multichannel = True),4)
-    MSE[0] = np.round(compare_mse(pred_resize, ground_truth_resize),4)
-    RMSE[0] = np.round(compare_nrmse(pred_resize, ground_truth_resize),4)
+    #SSIM[0] = np.round(measure.compare_ssim(pred_img, ground_truth_img, multichannel = True),4)
+    MSE[0] = np.round(measure.compare_mse(pred_resize, ground_truth_resize),4)
+    RMSE[0] = np.round(measure.compare_nrmse(pred_resize, ground_truth_resize),4)
     
     f, (ax1, ax2, ax3) = plt.subplots(3, 1, sharex=True)
     f.set_size_inches(20,9)

@@ -36,10 +36,11 @@ def start_test(gpu_device):
     
     #test_dataset = loader.load_test_dataset(batch_size = BATCH_SIZE, num_image_to_load = 2000)
     
-    test_dataset = loader.load_unseen_dataset(BATCH_SIZE, 1900)
+    # test_dataset = loader.load_unseen_dataset(BATCH_SIZE, 1900)
+    test_dataset = loader.load_unseen_dataset(BATCH_SIZE)
     #compute_dataset_mean(test_dataset)
-    measure_performance(gpu_device, ct, test_dataset)
-    #check_on_unseen_data(gpu_device, ct)
+    # measure_performance(gpu_device, ct, test_dataset)
+    check_on_unseen_data(gpu_device, ct)
     
 def compute_dataset_mean(test_dataset):
     accumulate_T = np.zeros(9)
@@ -192,7 +193,7 @@ def measure_performance(gpu_device, trainer, test_dataset):
 def check_on_unseen_data(gpu_device, trainer):
     unseen_dataset = loader.load_unseen_dataset(BATCH_SIZE)
     
-    overall_index = 0;
+    overall_index = 0
     for batch_idx, (rgb, warp, transform, path) in enumerate(unseen_dataset):
         for i in range(np.shape(warp)[0]):
             warp_candidate = torch.unsqueeze(warp[i,:,:,:], 0)

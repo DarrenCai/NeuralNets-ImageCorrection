@@ -39,6 +39,10 @@ def assemble_train_data(num_image_to_load = -1):
             transformPath = gv.SAVE_PATH_WARP + images[i].replace(".png", ".txt")
             warp_list.append(warpImagePath)
             transform_list.append(transformPath)
+
+    rgb_list.sort()
+    warp_list.sort()
+    transform_list.sort()
         
     return rgb_list, warp_list, transform_list
 
@@ -69,6 +73,10 @@ def assemble_test_data(num_image_to_load = -1):
             transformPath = gv.SAVE_PATH_WARP_VAL + images[i].replace(".png", ".txt")
             warp_list.append(warpImagePath)
             transform_list.append(transformPath)
+
+    rgb_list.sort()
+    warp_list.sort()
+    transform_list.sort()
         
     return rgb_list, warp_list, transform_list
 
@@ -97,6 +105,10 @@ def assemble_unseen_data(num_image_to_load = -1):
             transformPath = gv.SAVE_PATH_UNSEEN_DATA_WARP + images[i].replace(".png", ".txt")
             warp_list.append(warpImagePath)
             transform_list.append(transformPath)
+
+    rgb_list.sort()
+    warp_list.sort()
+    transform_list.sort()
         
     return rgb_list, warp_list, transform_list
 
